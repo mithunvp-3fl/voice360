@@ -1,0 +1,41 @@
+name: EAS OTA update
+
+# Pushes JS-only changes to existing dev-builds without a fresh native build.
+# Native config / dependency changes still need eas-build (see eas-build.yml).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/mobile/**'
+      - 'packages/**'
+      - '!apps/mobile/app.json'
+      - '!apps/mobile/eas.json'
+      - '!apps/mobile/package.json'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Publish OTA update
+        working-directory: apps/mobile
+        run: eas update --branch preview --message "${{ github.event.head_commit.message }}"

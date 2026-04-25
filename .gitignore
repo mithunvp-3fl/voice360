@@ -1,0 +1,28 @@
+node_modules/
+.next/
+dist/
+build/
+.expo/
+.expo-shared/
+*.log
+.DS_Store
+.turbo/
+coverage/
+.env
+.env.local
+.env.*.local
+!.env.example
+.vercel/
+ios/
+android/
+.supabase/
+*.tsbuildinfo
+.idea/
+.vscode/
+
+# Per-package lock — pnpm-lock.yaml stays committed at the root
+apps/*/package-lock.json
+apps/*/yarn.lock
+
+# Per-user Claude Code permissions (not project-shared)
+.claude/settings.local.json

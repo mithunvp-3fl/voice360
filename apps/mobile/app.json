@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "VoiceOver360 Auditor",
+    "slug": "vo360-auditor",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "scheme": "vo360",
+    "platforms": ["ios", "android"],
+    "android": {
+      "package": "com.vo360.auditor",
+      "permissions": [
+        "RECORD_AUDIO",
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "ios": {
+      "bundleIdentifier": "com.vo360.auditor",
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Used for voice-driven audit answers.",
+        "NSCameraUsageDescription": "Used to capture evidence photos against audit questions."
+      }
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Used for voice-driven audit answers."
+        }
+      ],
+      "whisper.rn",
+      "onnxruntime-react-native"
+    ],
+    "extra": {
+      "router": { "origin": false }
+    }
+  }
+}
